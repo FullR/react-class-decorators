@@ -1,0 +1,25 @@
+{
+  "name": "react-es6-decorators",
+  "version": "0.0.1",
+  "scripts": {
+    "setup": "npm install && sudo npm install --global gulp",
+    "build": "gulp build",
+    "watch": "gulp"
+  },
+  "devDependencies": {
+    "babel": "^5.8.3",
+    "babel-core": "^5.8.3",
+    "babelify": "^6.1.3",
+    "browserify": "^11.0.0",
+    "browserify-incremental": "^3.0.1",
+    "express": "^4.13.1",
+    "gulp": "^3.9.0",
+    "gulp-ruby-sass": "^1.0.5",
+    "lodash": "^3.10.0"
+  },
+  "dependencies": {
+    "flyd": "^0.1.14",
+    "hasher": "^1.2.0",
+    "ramda": "^0.17.1"
+  }
+}
