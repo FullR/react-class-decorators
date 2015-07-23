@@ -24,15 +24,16 @@ window.addEventListener("resize", () => dimensionStream(getWindowDims()));
 @streamListener(dimensionStream)
 class ResizingBox extends React.Component {
   render() {
+      // these props are provided by the wrapping component created by streamListener
       const {windowWidth, windowHeight} = this.props;
         const style = {
           width: windowWidth * 0.5, 
-            height: windowHeight * 0.5
+          height: windowHeight * 0.5
         };
         return (
           <div style={style}>
-              {this.props.children}
-            </div>
+            {this.props.children}
+          </div>
         );
     }
 }
