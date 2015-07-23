@@ -1,5 +1,5 @@
 {
-  "name": "react-es6-decorators",
+  "name": "react-class-decorators",
   "version": "0.0.1",
   "scripts": {
     "setup": "npm install && sudo npm install --global gulp",

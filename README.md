@@ -1,4 +1,4 @@
-# Experimenting with higher order React components
+# Experimenting with higher order React components using ES7 decorators
 
 
 ### Stream Listener 
