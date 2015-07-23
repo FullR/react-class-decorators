@@ -20,6 +20,7 @@
   "dependencies": {
     "flyd": "^0.1.14",
     "hasher": "^1.2.0",
-    "ramda": "^0.17.1"
+    "ramda": "^0.17.1",
+    "react": "^0.13.3"
   }
 }
