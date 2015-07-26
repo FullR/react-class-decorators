@@ -150,3 +150,5 @@ class Foo extends React.Component {
 }
 ```
 
+## About the author
+Hello I'm James. I'm a full stack web developer currently looking for work.
