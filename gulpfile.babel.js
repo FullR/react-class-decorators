@@ -57,6 +57,11 @@ gulp.task("serve", () => {
   const app = express();
   app.use(express.static("./bin"));
   app.use(express.static("./node_modules"));
+  app.route("/api/things").get((req, res) => {
+    setTimeout(() => {
+      res.json(["foo", "bar", "fizz", "buzz"])
+    }, 3000);
+  });
   app.listen(port, () => {
     console.log(`Listening on port ${port}`);
   });
