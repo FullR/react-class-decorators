@@ -20,8 +20,11 @@
   "dependencies": {
     "flyd": "^0.1.14",
     "hasher": "^1.2.0",
+    "pixi.js": "^3.0.7",
     "ramda": "^0.17.1",
     "react": "^0.13.3",
+    "react-pixi": "^0.6.1",
+    "rx": "^2.5.3",
     "superagent": "^1.2.0"
   }
 }
