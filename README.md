@@ -3,13 +3,28 @@
 ## Syntax
 These examples use the proposed [ES7 decorator syntax](https://github.com/wycats/javascript-decorators) and are compiled using [Babel](https://github.com/babel/babel).
 
-## Build and Run
+## Build, Test and Run
 
+**Setup**
 ```bash
 git clone https://github.com/FullR/react-class-decorators.git
 cd react-class-decorators
 sudo npm install gulp --global # Ignore if you already have gulp installed
 npm install
+```
+
+**Test**
+```bash
+npm run test
+```
+
+**Build**
+```bash
+gulp build
+```
+
+**Run**
+```bash
 gulp
 # Navigate to http://127.0.0.1:8080/ to view examples
 ```
@@ -30,24 +45,6 @@ class Foo extends React.Component {
 }
 ```
 
-### computedProps
-`(...[computedPropsObject]) => (Component) => WrappedComponent`
-
-Takes object's who's values are functions that take the wrapped components props and produce new props that will be passed to the wrapped component.
-
-```javascript
-@computedProps({
-  fullname({firstname, lastname}) {
-    return `${firstname} ${lastname}`;
-  }
-})
-class Person extends React.Component {
-  render() {
-    return <div>{this.props.fullname}</div>
-  }
-}
-```
-
 ### defaultProps
 `(...[defaultPropsObject]) => (Component) => WrappedComponent`
 
@@ -62,93 +59,40 @@ class Person extends React.Component {
 }
 ```
 
-### streamListener
-`(stream, [propKey]) => (Component) => WrappedComponent`
+### rxProps
+`(...propKeys) => (Component) => WrappedComponent`
 
-Takes a stream and an optional prop key. When the stream fires an event, the new value is stored in the wrapper components state and then passed to the child component as a property. A couple of uses for this are dealing with window resizes and hash changes:
+Takes an array of prop names. When the wrapped component is passed properties, the props passed to rxProps will be subscribed to if they're streams. The wrapped component
+will be updated with the streamed values of those props.
 
 ```javascript
-const counter = flyd.stream(0);
-setInterval(() => {
-  counter(counter() + 1);
-}, 1000);
+const countStream = new Rx.BehaviorSubject(0);
 
-@streamListener(counter, "count")
-class CounterBox extends React.Component {
-  render() {
-        return (
-          <div>
-            count: {this.props.count}
-          </div>
-        );
-    }
+function increment() {
+  count.onNext(count.getValue() + 1);
 }
 
-```
-
-### streamProps
-`(...propNames) => (Component) => WrappedComponent`
-
-Watches the passed props (if they're streams) and passes their streamed values to the wrapped component.
-
-```javascript
-const requests = flyd.stream();
-const responses = flyd.stream([requests], (self) => {
-  get("/api/things").then((things) => {
-    self(things); // causes responses to emit things
-  });
-});
-
-@bindProps({things: responses})
-@streamProps("things")
-class ThingViewer extends React.Component {
-  componentDidMount() {
-    requests(true);
-  }
-
-  render() {
-    ...render this.props.things
-  }
+function decrement() {
+  count.onNext(count.getValue() - 1);
 }
-```
 
-### hashListener
-`(Component) => WrappedComponent`
-
-Provides the current browser hash to Component. When the hash changes, the new value will be passed down to Component. Hash value is passed using the "hash" prop key.
-
-```javascript
-@hashListener
-class Router extends React.Component {
-  render() {
-    switch(this.props.hash) {
-      case "bar": return <Bar/>;
-      case "fizz": return <Fizz/>;
-      case "buzz": return <Buzz/>;
-      default: return <Foobar/>;
-    }
-  }
-}
-```
-
-### resizeListener
-`(Component) => WrappedComponent`
-
-Provides the current window width and height to Component. When the window resizes, the new width and height will be passed down to Component.
-
-```javascript
-@resizeListener
-class Foo extends React.Component {
+@rxProps("count")
+class Counter extends React.Component {
   render() {
     return (
       <div>
-        <div>Window width = {this.props.windowWidth}</div>
-        <div>Window height = {this.props.windowHeight}</div>
+        <button onClick={decrement}>-</button>
+        {this.props.count}
+        <button onClick={increment}>+</button>
       </div>
     );
   }
 }
+
+React.render(<Counter count={countStream}/>, document.body);
 ```
 
 ## About the author
-Hello I'm James. I'm a full stack web developer currently looking for work.
+Hello, my name is James, and I'm a full stack web developer currently looking for work.
+
+james.meyers919@gmail.com

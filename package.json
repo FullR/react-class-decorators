@@ -4,7 +4,8 @@
   "scripts": {
     "setup": "npm install && sudo npm install --global gulp",
     "build": "gulp build",
-    "watch": "gulp"
+    "watch": "gulp",
+    "test": "./node_modules/mocha/bin/mocha --compilers js:babel/register"
   },
   "devDependencies": {
     "babel": "^5.8.3",
@@ -15,16 +16,12 @@
     "express": "^4.13.1",
     "gulp": "^3.9.0",
     "gulp-ruby-sass": "^1.0.5",
-    "lodash": "^3.10.0"
+    "lodash": "^3.10.0",
+    "mocha": "^2.2.5"
   },
   "dependencies": {
-    "flyd": "^0.1.14",
     "hasher": "^1.2.0",
-    "pixi.js": "^3.0.7",
-    "ramda": "^0.17.1",
     "react": "^0.13.3",
-    "react-pixi": "^0.6.1",
-    "rx": "^2.5.3",
-    "superagent": "^1.2.0"
+    "rx": "^2.5.3"
   }
 }

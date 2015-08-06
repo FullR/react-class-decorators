@@ -17,7 +17,7 @@ gulp.task("babel", () => {
   // compile ES6/JSX
   b.transform(babelify.configure({
     ignore: /node_modules/,
-    stage: 1
+    stage: 0
   })).on("error", function(error) {
     console.log(`Babel Error: ${error}`);
     this.emit("end"); // keeps task from hanging on error
