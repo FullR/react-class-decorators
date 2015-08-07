@@ -30,15 +30,38 @@ describe("computedProps", () => {
         }
       }
     };
+    const expected = 3;
     const propComputer = PropComputer(computedProps);
-    const expected = 15;
+
     propComputer(source);
     propComputer(source);
     propComputer(source);
+    propComputer({a: 15, b: 25});
     propComputer(source);
     propComputer(source);
-    if(computeCount > 1) {
-      throw new Error("failed to resolve cached values");
+    if(computeCount > expected) {
+      throw new Error("compute function ran more times than expected");
+    } else if(computeCount < expected) {
+      throw new Error("compute function ran less times than expected");
+    }
+  });
+
+  it("Should be able to compute properties that depend on other computed properties", () => {
+    const expected = "JOE SCHMOE";
+    const computedProps = {
+      fullname: {
+        deps: ["firstname", "lastname"],
+        compute: (f,l) => `${f} ${l}`
+      },
+      result: {
+        deps: ["fullname"],
+        compute: (fullname) => fullname.toUpperCase()
+      }
+    };
+    const source = {firstname: "joe", lastname: "schmoe"};
+    const passed = PropComputer(computedProps)(source).result === expected;
+    if(!passed) {
+      throw new Error("Computed value does not match expected value");
     }
   });
 });
