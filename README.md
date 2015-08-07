@@ -59,6 +59,28 @@ class Person extends React.Component {
 }
 ```
 
+### computedProps
+`(computedPropMap) => (Component) => WrappedComponent`
+
+Takes an object that defines computed properties as a list of dependent property keys and a compute function `{deps: ...Keys, compute: Function}`.
+When the wrapped component receives new props, computed properties will be lazily recomputed. Computed props can rely on other computed props (circular dependencies are not supported).
+
+```javascript
+@computedProps({
+  fullname: {
+    deps: ["firstname", "lastname"],
+    compute(fname, lname) {
+      return `${fname} ${lname}`;
+    }
+  }
+})
+class Person extends React.Component {
+  render() {
+    return (<span>{this.props.fullname}</span>);
+  }
+}
+```
+
 ### rxProps
 `(...propKeys) => (Component) => WrappedComponent`
 
