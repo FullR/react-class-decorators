@@ -114,6 +114,34 @@ class Counter extends React.Component {
 React.render(<Counter count={countStream}/>, document.body);
 ```
 
+### propState
+`(propStateDef) => (Component) => WrappedComponent`
+
+Takes an object thats keys defines propNames and values define variable description objects (shape: `{value, reduce:Function}`) that should be persisted beyond updates. The values will be passed as objects with this shape: `{value, [update]}`. When `update` is called, a new value will be generated using the variable descriptor's `reduce` function.
+
+```javascript
+@propState({
+  count: {
+    value: 0,
+    reduce(value, change) {
+      return value + change;
+    }
+  }
+})
+export default class CounterExample extends React.Component {
+  render() {
+    const {count} = this.props;
+    return (
+      <section>
+        <button onClick={() => count.update(-1)}>-</button>
+        <span>{count.value}</span>
+        <button onClick={() => count.update(1)}>+</button>
+      </section>
+    );
+  }
+}
+```
+
 ## About the author
 Hello, my name is James, and I'm a full stack web developer currently looking for work.
 
