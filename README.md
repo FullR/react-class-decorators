@@ -123,8 +123,8 @@ Takes an object thats keys defines propNames and values define variable descript
 @propState({
   count: {
     value: 0,
-    reduce(value, change) {
-      return value + change;
+    reduce(current, change) {
+      return current + change;
     }
   }
 })
