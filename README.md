@@ -88,7 +88,7 @@ Takes an array of prop names. When the wrapped component is passed properties, t
 will be updated with the streamed values of those props.
 
 ```javascript
-const countStream = new Rx.BehaviorSubject(0);
+const count = new Rx.BehaviorSubject(0);
 
 function increment() {
   count.onNext(count.getValue() + 1);
@@ -111,7 +111,7 @@ class Counter extends React.Component {
   }
 }
 
-React.render(<Counter count={countStream}/>, document.body);
+React.render(<Counter count={count}/>, document.body);
 ```
 
 ### propState
