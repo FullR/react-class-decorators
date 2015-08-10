@@ -89,7 +89,7 @@ Takes an array of prop names. When the wrapped component is passed properties, t
 will be updated with the streamed values of those props.
 
 ```javascript
-const countStream = new Rx.BehaviorSubject(0);
+const count = new Rx.BehaviorSubject(0);
 
 function increment() {
   count.onNext(count.getValue() + 1);
@@ -112,7 +112,35 @@ class Counter extends React.Component {
   }
 }
 
-React.render(<Counter count={countStream}/>, document.body);
+React.render(<Counter count={count}/>, document.body);
+```
+
+### propState
+`(propStateDef) => (Component) => WrappedComponent`
+
+Takes an object thats keys defines propNames and values define variable description objects (shape: `{value, reduce:Function}`) that should be persisted beyond updates. The values will be passed as objects with this shape: `{value, [update]}`. When `update` is called, a new value will be generated using the variable descriptor's `reduce` function.
+
+```javascript
+@propState({
+  count: {
+    value: 0,
+    reduce(current, change) {
+      return current + change;
+    }
+  }
+})
+export default class CounterExample extends React.Component {
+  render() {
+    const {count} = this.props;
+    return (
+      <section>
+        <button onClick={() => count.update(-1)}>-</button>
+        <span>{count.value}</span>
+        <button onClick={() => count.update(1)}>+</button>
+      </section>
+    );
+  }
+}
 ```
 
 ## About the author
