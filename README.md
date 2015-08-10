@@ -1,6 +1,7 @@
 # Experimenting with higher order React components using ES7 decorators
 
-## Syntax
+## About
+Inspired by [this gist](https://gist.github.com/sebmarkbage/ef0bf1f338a7182b6775) by Sebastian Markbåge.
 These examples use the proposed [ES7 decorator syntax](https://github.com/wycats/javascript-decorators) and are compiled using [Babel](https://github.com/babel/babel).
 
 ## Build, Test and Run
