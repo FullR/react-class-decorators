@@ -1,4 +1,4 @@
-# Experimenting with higher order React components using ES7 decorators
+# Experimenting with higher-order React components using ES7 decorators
 
 ## About
 Inspired by [this gist](https://gist.github.com/sebmarkbage/ef0bf1f338a7182b6775) by Sebastian Markbåge.
